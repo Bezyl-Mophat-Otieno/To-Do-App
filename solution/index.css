@@ -1,0 +1,146 @@
+*{
+    margin:0;
+    padding:0;
+}
+body{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.main{
+    height: 100vh;
+    width: 100vw;
+
+}
+.upper{
+    background-image: linear-gradient(to right, #081166, #36044d);
+    height: 30vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+}
+.upperItems{
+    width: 50vw;
+    margin-top: 5vh;
+    margin-bottom: 10vh;
+
+}
+.upperItems form {
+    margin-top: 5vh;
+    display: flex;
+    gap: 5vh;
+    
+}
+.upperItems form input{
+    padding-left: 2vw;    
+}
+input[type="checkbox"]{
+    width: 1vw;
+    height: 1vw;
+    outline: none;
+    border-radius: 50%;
+    border: none;
+    background-color: #353b69;
+}
+
+.upperItems h1{
+    font-size: 3rem;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+}
+.upperItems .inputTask{
+    width: 100%;
+    height: 7vh;
+    border-radius: 5px;
+    background-color: #353b69;
+    border: none;
+    outline: none;
+    color: white;
+
+}
+
+
+.lower{
+    background-color: #060d47;
+    height: 70vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+
+}
+.individualTask{
+    width:12vw;
+
+}
+.lowerItems{
+    width: 50%;
+}
+.lowerItems .listContainer{
+    width: 50vw;
+    height: 50vh;
+    background-color: #353b69;
+    border-radius: 15px;
+    
+ 
+}
+.listItems{
+    width: 100%;
+    height: 7vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2vh;
+    padding: 4vw 4vw;
+}
+.listItems li{
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    text-decoration: none;
+    color: white;
+}
+.taskContainer{
+    color: white;
+    display: flex;
+    gap: 30vw;
+    align-items: center;
+}
+.stats{
+    margin-top: 20vh;
+    width: 20vw;
+    display: flex;
+    color:#8c7597 ;
+    gap: 25vw;
+    align-items: center;
+}
+
+.action{
+    margin-top: 2vh;
+    display: flex;
+    gap: 2vw;
+    align-items: center;
+    justify-content: center;
+    background-color:#353b69 ;
+    padding: 1vh 1vw;
+    
+}
+
+ button{
+    transition: all 0.3s ease-in-out;
+    outline: none;
+    color: rgba(255, 255, 255, 0.411);
+    width: 10vw;
+    border: 1px solid rgb(128, 123, 123);
+    border-radius: 10px;
+    padding: 1vw;
+    background-color: #353b69;
+    cursor: pointer;
+}
+ .clearBtn button{
+    width: 10vw;
+}
+ button:hover{
+    background-color: #060d47;
+    color: white;
+}
