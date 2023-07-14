@@ -10,7 +10,10 @@
     <div class="main">
         <div class="upper">
             <div class="upperItems">
-                <h1>To do App</h1>
+                <div class="header">
+                    <h1>To do App</h1>
+                    <div class="incompleteTasks">0 Items Left</div>
+                </div>
                 <form id="form">
                     <input type="checkbox" name="" id="checkbox">
                     <input class="inputTask" type="text" name="task" id="task" placeholder="Enter your task">
@@ -23,16 +26,14 @@
             <div class="lowerItems">
                 <div class="listContainer">
                     <div class="listItems">
-                    <!-- <div class="stats">
-                        <div class="incompleteTasks"> 0 Items Left </div>
-                        <button class="clearBtn">Clear</button>
-                    </div> -->
+
                     </div>
                 </div>
                 <div class="action">
                     <button class="all">All</button>
                     <button class="active">Active</button>
                     <button class="completed">Completed</button>
+                    <button class="clear">Clear</button>
                 </div>
             </div>
         </div>

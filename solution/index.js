@@ -12,8 +12,11 @@ let form = document.querySelector('#form');
     e.preventDefault()
     let input = document.querySelector('#task');
     let task = input.value;
+    //This method trims all the spaces 
+    let notSpace =  task.trim();
 
-    if(task){
+    if(notSpace){
+        
         task = {
             task:task,
             checked:checkBox.checked
@@ -26,18 +29,9 @@ let form = document.querySelector('#form');
 
         //initializing the count of the incomplete tasks;
         let count = 0;
-        // check if stats exists
-        let stats = document.querySelector('.stats');
-        if(stats){
-                while (stats.firstChild) {
-                    stats.removeChild(stats.firstChild);
-                } 
-        }else{
-            
-        }
+
         // Accessing the incomplete task container
         writeDom(tasks,count);
-
     }
  })
 
@@ -45,16 +39,15 @@ let form = document.querySelector('#form');
 const writeDom = (tasks,count)=>{
     let tasksList = document.querySelector('.listItems');
     tasksList.innerHTML = '';
-       // creaete the stats container
-       let stats = document.createElement('div')
-       stats.className = 'stats';
+
        
     // Count completed tasks;
     tasks.forEach((task)=>{
-        if(task.checked){
+        if(!task.checked){
             count++
+        }else{
+            count = count;
         }
-
 
     
         // This div will act as a container for holding the task group including the checkbox and the task content;
@@ -68,16 +61,6 @@ const writeDom = (tasks,count)=>{
         let checkBox = document.createElement('input');
         checkBox.setAttribute('type','checkbox');
 
-     
-        // create the incomplete tasks container
-        // let incompleteTasksContainer = document.createElement('div');
-        // incompleteTasksContainer.className = 'incompleteTasks';
-        // incompleteTasksContainer.innerText = `${count} items left`;
-
-        //create the clear button
-        // let clearButton = document.createElement('button');
-        // clearButton.className = 'clearBtn';
-        // clearButton.innerText = 'Clear';
 
         // Setting the checkbox to the value of the task checked property;
         checkBox.checked = task.checked;  
@@ -88,19 +71,15 @@ const writeDom = (tasks,count)=>{
         taskContainer.appendChild(checkBox);
         taskContainer.appendChild(individualTask);
 
-        //Appending the children to the stats container;
-        // stats.appendChild(incompleteTasksContainer);
-        // stats.appendChild(clearButton);
+   
         
         
         // Finially append the task container to the task list;
         tasksList.appendChild(taskContainer);
-        // tasksList.appendChild(stats);
 
         //Write the dom to reflect on the incompleted tasks count;
-
-
-
+        let incompleteTasks = document.querySelector('.incompleteTasks');
+        incompleteTasks.innerHTML = `${count} items left`;
         
         if(checkBox.checked){
             individualTask.style.textDecoration = 'line-through';
@@ -111,142 +90,41 @@ const writeDom = (tasks,count)=>{
         // changing the style of the task content when the checkbox is checked;
         checkBox.addEventListener('change',()=>{
             if(individualTask.style.textDecoration === 'none'){
+                    task.checked = true
+                    count--;
+                    incompleteTasks.innerHTML = `${count} items left`;
+
                 individualTask.style.textDecoration = 'line-through';
             }else{
+                task.checked = false
                 individualTask.style.textDecoration = 'none';
+                count++;
+                incompleteTasks.innerHTML = `${count} items left`;
             }
         })
 
       
  
     })
-    //modify the count completed tasks;
-    // incompleteTasksContainer.innerText = `You have ${count} incomplete tasks`;
-    // console.log(incompleteTasksContainer)
 
 
 }
 
-// const clearChildren = () => {
-//     const parent = document.querySelector('parent');
-//     while (parent.firstChild) {
-//       parent.removeChild(parent.firstChild);
-//     }
-// }
-
 let displayAll = document.querySelector('.all');
 displayAll.addEventListener('click',()=>{
-
-    let tasksList = document.querySelector('.listItems');
-    tasksList.innerHTML = '';
-    tasks.forEach((task)=>{
-
-        // This div will act as a container for holding the task group including the checkbox and the task content;
-        let taskContainer = document.createElement('div');
-        taskContainer.className = 'taskContainer';
-
-        //This is a div holding a single task content;
-        let individualTask = document.createElement('div');
-        individualTask.className = 'individualTask'; 
-        //creating a checkbox element;
-        let checkBox = document.createElement('input');
-        checkBox.setAttribute('type','checkbox');
-
-
-        // Setting the checkbox to the value of the task checked property;
-        checkBox.checked = task.checked;  
-        // Setting the task content to the value of the task task property;    
-        individualTask.innerHTML = task.task;
-
-        // Appending the checkbox and the task content to the task container;
-        taskContainer.appendChild(checkBox);
-        taskContainer.appendChild(individualTask);
-
-        
-        // Finially append the task container to the task list;
-        tasksList.appendChild(taskContainer);
-
-        //Write the dom to reflect on the incompleted tasks count;
-
-        if(checkBox.checked){
-            individualTask.style.textDecoration = 'line-through';
-        }else{
-            individualTask.style.textDecoration = 'none';
-        }
-
-        // changing the style of the task content when the checkbox is checked;
-        checkBox.addEventListener('change',()=>{
-            if(individualTask.style.textDecoration === 'none'){
-                individualTask.style.textDecoration = 'line-through';
-            }else{
-                individualTask.style.textDecoration = 'none';
-            }
-        })
-
-      
- 
-    })
-
+    let count = 0;
+    writeDom(tasks,count)
 })
 
 
 
 let displayActive = document.querySelector('.active');
 displayActive.addEventListener('click',()=>{
+    
 
-    let tasksList = document.querySelector('.listItems');
-    tasksList.innerHTML = '';
-    tasks.forEach((task)=>{
-
-        if(task.checked === false){
-
-        // This div will act as a container for holding the task group including the checkbox and the task content;
-        let taskContainer = document.createElement('div');
-        taskContainer.className = 'taskContainer';
-
-        //This is a div holding a single task content;
-        let individualTask = document.createElement('div');
-        individualTask.className = 'individualTask'; 
-        //creating a checkbox element;
-        let checkBox = document.createElement('input');
-        checkBox.setAttribute('type','checkbox');
-
-
-        // Setting the checkbox to the value of the task checked property;
-        checkBox.checked = task.checked;  
-        // Setting the task content to the value of the task task property;    
-        individualTask.innerHTML = task.task;
-
-        // Appending the checkbox and the task content to the task container;
-        taskContainer.appendChild(checkBox);
-        taskContainer.appendChild(individualTask);
-
-        
-        // Finially append the task container to the task list;
-        tasksList.appendChild(taskContainer);
-
-        //Write the dom to reflect on the incompleted tasks count;
-
-        if(checkBox.checked){
-            individualTask.style.textDecoration = 'line-through';
-        }else{
-            individualTask.style.textDecoration = 'none';
-        }
-
-        // changing the style of the task content when the checkbox is checked;
-        checkBox.addEventListener('change',()=>{
-            if(individualTask.style.textDecoration === 'none'){
-                individualTask.style.textDecoration = 'line-through';
-            }else{
-                individualTask.style.textDecoration = 'none';
-            }
-        })
-
-    }else{
-        return;
-    }
- 
-    })
+    let activeItems = tasks.filter((task)=>task.checked === false);
+    let count = 0;
+    writeDom(activeItems,count);
 
 })
 
@@ -254,59 +132,51 @@ displayActive.addEventListener('click',()=>{
 
 let displayCompleted = document.querySelector('.completed');
 displayCompleted.addEventListener('click',()=>{
+    let completedItems = tasks.filter((task)=>task.checked === true);
+    let count = 0;
+    writeDom(completedItems,count);
+})
 
+
+// let clearBtn = document.querySelector('.clear');
+
+// clearBtn.addEventListener('click',()=>{
+//     let tasksList = document.querySelector('.listItems');
+//     while (tasksList.firstChild) {
+//         tasksList.removeChild(tasksList.firstChild);
+//          //Write the dom to reflect on the incompleted tasks count;
+//          let incompleteTasks = document.querySelector('.incompleteTasks');
+//          incompleteTasks.innerHTML = `0 items left`;
+//          tasks = [];
+//     }
+
+// })
+
+let clearBtn = document.querySelector('.clear');
+
+clearBtn.addEventListener('click',()=>{
     let tasksList = document.querySelector('.listItems');
-    tasksList.innerHTML = '';
+
     tasks.forEach((task)=>{
-
-        if(task.checked === true){
-
-        // This div will act as a container for holding the task group including the checkbox and the task content;
-        let taskContainer = document.createElement('div');
-        taskContainer.className = 'taskContainer';
-
-        //This is a div holding a single task content;
-        let individualTask = document.createElement('div');
-        individualTask.className = 'individualTask'; 
-        //creating a checkbox element;
-        let checkBox = document.createElement('input');
-        checkBox.setAttribute('type','checkbox');
-
-
-        // Setting the checkbox to the value of the task checked property;
-        checkBox.checked = task.checked;  
-        // Setting the task content to the value of the task task property;    
-        individualTask.innerHTML = task.task;
-
-        // Appending the checkbox and the task content to the task container;
-        taskContainer.appendChild(checkBox);
-        taskContainer.appendChild(individualTask);
-
-        
-        // Finially append the task container to the task list;
-        tasksList.appendChild(taskContainer);
-
-        //Write the dom to reflect on the incompleted tasks count;
-
-        if(checkBox.checked){
-            individualTask.style.textDecoration = 'line-through';
-        }else{
-            individualTask.style.textDecoration = 'none';
+        if(task.checked){
+        tasksList.removeChild(tasksList.firstChild);
+          let activeItems = tasks.filter((task)=>task.checked === false);
+            tasks = activeItems;
         }
-
-        // changing the style of the task content when the checkbox is checked;
-        checkBox.addEventListener('change',()=>{
-            if(individualTask.style.textDecoration === 'none'){
-                individualTask.style.textDecoration = 'line-through';
-            }else{
-                individualTask.style.textDecoration = 'none';
-            }
-        })
-
-    }else{
-        return;
-    }
- 
     })
+  
+  
+
 
 })
+
+
+
+
+
+
+
+
+
+
+
