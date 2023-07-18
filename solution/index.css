@@ -157,7 +157,7 @@ body{
     background-color: #060d47;
     color: white;
 }
-
+/* Responsiveness for tablets */
 @media screen and ( max-width:710px) {
     .listContainer{
         width: 50%;
@@ -208,3 +208,42 @@ body{
     
    
 }
+
+/* Responsiveness for mobile phones */
+
+
+@media screen and (max-width:390px) {
+
+    .header{
+        display: flex;
+        flex-direction: column;
+        gap: 2vh;
+        justify-content: flex-start;
+        align-items: flex-start;
+        
+
+    }
+    .inputs{
+        margin-top: 5vh;
+    }
+    .btn{
+        margin-bottom: 3vh;
+    }
+    .listContainer{
+        margin-top: 5vh;
+        width: auto;
+        
+    }
+    .listItems{
+        display: flex;
+        justify-content: center;
+        gap: 1vw;
+        align-items: start;
+    }
+
+
+    
+}
+
+
+  

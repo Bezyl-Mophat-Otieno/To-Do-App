@@ -2,13 +2,16 @@
 // Declare an array that will hold the tasks;
 let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
-
  // Deaclare a checkbox element;
  let checkBox = document.querySelector('#checkbox');
  let errorDiv = document.querySelector('.erroDiv');
  let html =''
- 
- let errorOccured = JSON.parse(localStorage.getItem('errorOccured'));
+
+
+
+
+ // Declare a variable that will hold the error state;
+ let errorOccured = false;
 
  // Declare a form element;
  let form = document.querySelector('#form');
@@ -39,30 +42,27 @@ let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
         // Accessing the incomplete task container
         writeDom(tasks,count);
 
-        // store the errorOccured value in localstorage
-        errorOccured = false;
-        localStorage.setItem('errorOccured',JSON.stringify(errorOccured));
     }else{
 
-        // store the errorOccured value in localstorage 
-         errorOccured = true;
-        localStorage.setItem('errorOccured',JSON.stringify(errorOccured));
+        errorOccured = true;
+        html = '';
+
+        html+=`
+            <div class="error">Task cannot be empty</div>
+            `;
+            errorDiv.innerHTML = html;
+
+            setTimeout(() => {
+                errorDiv.innerHTML ='';
+                errorOccured = false;
+                // html+=``;
+            }, 1000);
+         
+    
     }
  })
-// 
-console.log(errorOccured)
-if(errorOccured===true){
-    // console.log('error occured')
-   html+=`
-   <div class="error">Task cannot be empty</div>
-   `;
-   errorDiv.innerHTML = html;
-}else{
-    // console.log('no error')
 
-    html+=``;
-    errorDiv.innerHTML = html;
-}
+
 
 //Function the handles writing the elements to the dom .
 const writeDom = (tasks,count)=>{
@@ -100,8 +100,6 @@ const writeDom = (tasks,count)=>{
         taskContainer.appendChild(individualTask);
 
    
-        
-        
         // Finially append the task container to the task list;
         tasksList.appendChild(taskContainer);
 
@@ -138,14 +136,33 @@ const writeDom = (tasks,count)=>{
 
 }
 
+
+
+
+
+
+
+
+
 // Initializa the dom
 writeDom(tasks,0);
+
+
+
+
+
+
+
+
 
 let displayAll = document.querySelector('.all');
 displayAll.addEventListener('click',()=>{
     let count = 0;
     writeDom(tasks,count)
 })
+
+
+
 
 
 
@@ -161,6 +178,9 @@ displayActive.addEventListener('click',()=>{
 
 
 
+
+
+
 let displayCompleted = document.querySelector('.completed');
 displayCompleted.addEventListener('click',()=>{
     let completedItems = tasks.filter((task)=>task.checked === true);
@@ -169,19 +189,7 @@ displayCompleted.addEventListener('click',()=>{
 })
 
 
-// let clearBtn = document.querySelector('.clear');
 
-// clearBtn.addEventListener('click',()=>{
-//     let tasksList = document.querySelector('.listItems');
-//     while (tasksList.firstChild) {
-//         tasksList.removeChild(tasksList.firstChild);
-//          //Write the dom to reflect on the incompleted tasks count;
-//          let incompleteTasks = document.querySelector('.incompleteTasks');
-//          incompleteTasks.innerHTML = `0 items left`;
-//          tasks = [];
-//     }
-
-// })
 
 let clearBtn = document.querySelector('.clear');
 
@@ -196,9 +204,6 @@ clearBtn.addEventListener('click',()=>{
         }
     })
   
-  
-
-
 })
 
 
