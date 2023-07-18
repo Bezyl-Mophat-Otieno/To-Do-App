@@ -8,6 +8,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow-x: hidden;
 }
 .main{
     height: 100vh;
@@ -38,19 +39,25 @@ body{
 
 }
 .upperItems form {
-    margin-top: 5vh;
+    margin-top: 2vh;
     display: flex;
-    gap: 5vh;
+    justify-content: space-between;
     
 }
 .upperItems form input{
-    padding-left: 2vw;    
+    padding-left: 2vw;   
+    width: 20vw; 
 }
- input[type="checkbox"]{
-    width: 2vw;
-    height: 2vh;
-    outline: none;
-    border: none;
+.inputs{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2vw;
+}
+ 
+.error{
+    color: red;
+    font-size: 13px;
 }
 
 .upperItems h1{
@@ -113,7 +120,7 @@ body{
 .taskContainer{
     color: white;
     display: flex;
-    gap: 30vw;
+    gap: 10vw;
     align-items: center;
 }
 .stats{
@@ -166,7 +173,38 @@ body{
         flex-direction: column;
         gap: 3vh;
     }
-    .lower{
-        height: 100vh;
+    .lowerItems{
+        height: 50%;
+        margin-top: 10vh;
     }
+    .listItems{
+        display: flex;
+        flex-direction: row;
+        height: 40vh;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        justify-content: center;
+        align-items: flex-start;
+        
+
+    }
+    .upperItems form {
+        margin-bottom: 1vh;
+        display: flex;
+        flex-direction: column;
+        gap: 1vh;
+        
+    }
+    .upperItems form input{
+        width:90% ;    
+    }
+   
+    .inputs{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 2vw;
+    }
+    
+   
 }

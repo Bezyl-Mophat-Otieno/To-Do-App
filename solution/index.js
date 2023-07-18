@@ -1,21 +1,25 @@
 // Event Listener for on submit ;
 // Declare an array that will hold the tasks;
-let tasks = [];
+let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
 
  // Deaclare a checkbox element;
  let checkBox = document.querySelector('#checkbox');
-
+ let errorDiv = document.querySelector('.erroDiv');
+ let html =''
  
-// Declare a form element;
-let form = document.querySelector('#form');
+ let errorOccured = JSON.parse(localStorage.getItem('errorOccured'));
+
+ // Declare a form element;
+ let form = document.querySelector('#form');
  form.addEventListener('submit',(e)=>{
     e.preventDefault()
     let input = document.querySelector('#task');
     let task = input.value;
     //This method trims all the spaces 
     let notSpace =  task.trim();
-
     if(notSpace){
+
         
         task = {
             task:task,
@@ -23,6 +27,8 @@ let form = document.querySelector('#form');
         }
 
         tasks = [...tasks,task];
+        // Store the tasks on Local storage
+        localStorage.setItem('tasks',JSON.stringify(tasks));
         // Resetting the inputs;
         input.value =''
         checkBox.checked=false
@@ -32,15 +38,37 @@ let form = document.querySelector('#form');
 
         // Accessing the incomplete task container
         writeDom(tasks,count);
+
+        // store the errorOccured value in localstorage
+        errorOccured = false;
+        localStorage.setItem('errorOccured',JSON.stringify(errorOccured));
+    }else{
+
+        // store the errorOccured value in localstorage 
+         errorOccured = true;
+        localStorage.setItem('errorOccured',JSON.stringify(errorOccured));
     }
  })
+// 
+console.log(errorOccured)
+if(errorOccured===true){
+    // console.log('error occured')
+   html+=`
+   <div class="error">Task cannot be empty</div>
+   `;
+   errorDiv.innerHTML = html;
+}else{
+    // console.log('no error')
+
+    html+=``;
+    errorDiv.innerHTML = html;
+}
 
 //Function the handles writing the elements to the dom .
 const writeDom = (tasks,count)=>{
     let tasksList = document.querySelector('.listItems');
     tasksList.innerHTML = '';
 
-       
     // Count completed tasks;
     tasks.forEach((task)=>{
         if(!task.checked){
@@ -109,6 +137,9 @@ const writeDom = (tasks,count)=>{
 
 
 }
+
+// Initializa the dom
+writeDom(tasks,0);
 
 let displayAll = document.querySelector('.all');
 displayAll.addEventListener('click',()=>{
